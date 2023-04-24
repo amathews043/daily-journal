@@ -10,7 +10,7 @@ export const DailyJournal = () => {
   const [entry, setEntry] = useState({
     concept: '',
     entry: '',
-    moodId: 0
+    mood_id: 0
   })
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const DailyJournal = () => {
     setEntry({
       concept: "",
       entry: "",
-      moodId: 0
+      mood_id: 0
     })
   }
 

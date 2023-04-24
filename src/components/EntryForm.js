@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 
+
 export const EntryForm = ({ entry, moods, onFormSubmit }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
@@ -24,11 +25,19 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
         setUpdatedEntry(newEntry)
     }
 
-
+    const handleIntControlledInputChange = (event) => {
+        /*
+            When changing a state object or array, always create a new one
+            and change state instead of modifying current one
+        */
+        const newEntry ={...updatedEntry}
+        newEntry[event.target.name] = parseInt(event.target.value)
+        setUpdatedEntry(newEntry)
+    }
 
     const constructNewEntry = () => {
         const copyEntry = { ...updatedEntry }
-        copyEntry.moodId = parseInt(copyEntry.moodId)
+        copyEntry.mood_id = parseInt(copyEntry.mood_id)
         if (!copyEntry.date) {
             copyEntry.date = Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
         }
@@ -63,13 +72,13 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
                         </div>
                     </div>
                     <div className="field">
-                        <label htmlFor="moodId" className="label">Mood: </label>
+                        <label htmlFor="mood_id" className="label">Mood: </label>
                         <div className="control">
                             <div className="select">
-                                <select name="moodId"
+                                <select name="mood_id"
                                     proptype="int"
-                                    value={updatedEntry.moodId}
-                                    onChange={handleControlledInputChange}>
+                                    value={updatedEntry.mood_id}
+                                    onChange={handleIntControlledInputChange}>
                                         <option value="0">Select a mood</option>
                                         {moods.map(m => (
                                             <option key={m.id} value={m.id}>

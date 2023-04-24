@@ -17,10 +17,10 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
   }, [searchedTerm, entries])
 
 
-  const filterAllEntries = (moodId) => {
-    const filteredEntriesByMood = entries.filter(entry => entry.moodId === parseInt(moodId))
+  const filterAllEntries = (mood_id) => {
+    const filteredEntriesByMood = entries.filter(entry => entry.mood_id === parseInt(mood_id))
     setEntries(filteredEntriesByMood)
-    setMoodSelected(parseInt(moodId))
+    setMoodSelected(parseInt(mood_id))
   }
 
 
@@ -57,7 +57,7 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
         return <div className="panel-block" key={entry.id}>
           <Entry
             entry={entry}
-            mood={moods.find(m => m.id === entry.moodId)}
+            mood={moods.find(m => m.id === entry.mood_id)}
             onEditButtonClick={onEditButtonClick}
             onDeleteButtonClick={onDeleteButtonClick}
           />
