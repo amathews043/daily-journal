@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 
 
-export const EntryForm = ({ entry, moods, onFormSubmit }) => {
+export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
 
@@ -86,6 +86,13 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
                                             </option>
                                         ))}
                                 </select>
+                                {
+                                    tags.map((t) => {return <div key={t.id}>
+                                        <label key={t.id}> {t.name} </label>
+                                        <input type="checkbox" name="tags" value={t.id} onChange={handleControlledInputChange}/>
+                                        </div>
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
