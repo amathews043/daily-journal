@@ -11,7 +11,8 @@ export const DailyJournal = () => {
   const [entry, setEntry] = useState({
     concept: '',
     entry: '',
-    mood_id: 0
+    mood_id: 0,
+    tag_id: 0
   })
   const [tags, setTags] = useState([])
 

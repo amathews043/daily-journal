@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
+    const [tagsList, setTagsList] = useState([])
 
     useEffect(() => {
         setUpdatedEntry(entry)
@@ -35,9 +36,20 @@ export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
         setUpdatedEntry(newEntry)
     }
 
+    const handleTagChange = (event) => {
+        const newTagsList = [...tagsList]
+        if(newTagsList.includes(parseInt(event.target.value))){
+            newTagsList.splice(newTagsList.indexOf(parseInt(event.target.value)), 1)
+        } else {
+            newTagsList.push(parseInt(event.target.value))
+        }
+        setTagsList(newTagsList)
+    }
+
     const constructNewEntry = () => {
         const copyEntry = { ...updatedEntry }
         copyEntry.mood_id = parseInt(copyEntry.mood_id)
+        copyEntry.tag_id = tagsList
         if (!copyEntry.date) {
             copyEntry.date = Date(Date.now()).toLocaleString('en-us').split('GMT')[0]
         }
@@ -89,7 +101,7 @@ export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
                                 {
                                     tags.map((t) => {return <div key={t.id}>
                                         <label key={t.id}> {t.name} </label>
-                                        <input type="checkbox" name="tags" value={t.id} onChange={handleControlledInputChange}/>
+                                        <input type="checkbox" name="tag_id" value={t.id} onChange={handleTagChange}/>
                                         </div>
                                     })
                                 }
